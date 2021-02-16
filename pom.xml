@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.userqiao</groupId>
-    <artifactId>line-word</artifactId>
+    <artifactId>line-work</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>line-word</name>
     <description>Demo project for Spring Boot</description>
@@ -72,6 +72,11 @@
             <groupId>org.springframework.amqp</groupId>
             <artifactId>spring-rabbit-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>1.1.13</version>
         </dependency>
     </dependencies>
 
