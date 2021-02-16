@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.userqiao.lineword.db.dao.TbUserDao">
-  <resultMap id="BaseResultMap" type="com.userqiao.lineword.db.pojo.TbUser">
+<mapper namespace="com.userqiao.linework.db.dao.TbUserDao">
+  <resultMap id="BaseResultMap" type="com.userqiao.linework.db.pojo.TbUser">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="param_key" jdbcType="VARCHAR" property="paramKey" />
     <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
@@ -21,13 +21,13 @@
     delete from sys_config
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.userqiao.lineword.db.pojo.TbUser" useGeneratedKeys="true">
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.userqiao.linework.db.pojo.TbUser" useGeneratedKeys="true">
     insert into sys_config (param_key, param_value, `status`, 
       remark)
     values (#{paramKey,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, 
       #{remark,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.userqiao.lineword.db.pojo.TbUser" useGeneratedKeys="true">
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.userqiao.linework.db.pojo.TbUser" useGeneratedKeys="true">
     insert into sys_config
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="paramKey != null">
@@ -58,7 +58,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.userqiao.lineword.db.pojo.TbUser">
+  <update id="updateByPrimaryKeySelective" parameterType="com.userqiao.linework.db.pojo.TbUser">
     update sys_config
     <set>
       <if test="paramKey != null">
@@ -76,7 +76,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.userqiao.lineword.db.pojo.TbUser">
+  <update id="updateByPrimaryKey" parameterType="com.userqiao.linework.db.pojo.TbUser">
     update sys_config
     set param_key = #{paramKey,jdbcType=VARCHAR},
       param_value = #{paramValue,jdbcType=VARCHAR},
