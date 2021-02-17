@@ -1,87 +1,194 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.userqiao.linework.db.dao.TbMeetingDao">
-  <resultMap id="BaseResultMap" type="com.userqiao.linework.db.pojo.TbMeeting">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="param_key" jdbcType="VARCHAR" property="paramKey" />
-    <result column="param_value" jdbcType="VARCHAR" property="paramValue" />
-    <result column="status" jdbcType="BOOLEAN" property="status" />
-    <result column="remark" jdbcType="VARCHAR" property="remark" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, param_key, param_value, `status`, remark
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from sys_config
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from sys_config
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.userqiao.linework.db.pojo.TbMeeting" useGeneratedKeys="true">
-    insert into sys_config (param_key, param_value, `status`, 
-      remark)
-    values (#{paramKey,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{status,jdbcType=BOOLEAN}, 
-      #{remark,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.userqiao.linework.db.pojo.TbMeeting" useGeneratedKeys="true">
-    insert into sys_config
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="paramKey != null">
-        param_key,
-      </if>
-      <if test="paramValue != null">
-        param_value,
-      </if>
-      <if test="status != null">
-        `status`,
-      </if>
-      <if test="remark != null">
-        remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="paramKey != null">
-        #{paramKey,jdbcType=VARCHAR},
-      </if>
-      <if test="paramValue != null">
-        #{paramValue,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=BOOLEAN},
-      </if>
-      <if test="remark != null">
-        #{remark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.userqiao.linework.db.pojo.TbMeeting">
-    update sys_config
-    <set>
-      <if test="paramKey != null">
-        param_key = #{paramKey,jdbcType=VARCHAR},
-      </if>
-      <if test="paramValue != null">
-        param_value = #{paramValue,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        `status` = #{status,jdbcType=BOOLEAN},
-      </if>
-      <if test="remark != null">
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.userqiao.linework.db.pojo.TbMeeting">
-    update sys_config
-    set param_key = #{paramKey,jdbcType=VARCHAR},
-      param_value = #{paramValue,jdbcType=VARCHAR},
-      `status` = #{status,jdbcType=BOOLEAN},
-      remark = #{remark,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+<mapper namespace="com.userqiao.linework.dao.TbMeetingDao">
+
+    <resultMap type="com.userqiao.linework.entity.TbMeeting" id="TbMeetingMap">
+        <result property="id" column="id" jdbcType="OTHER"/>
+        <result property="uuid" column="uuid" jdbcType="VARCHAR"/>
+        <result property="title" column="title" jdbcType="VARCHAR"/>
+        <result property="creatorId" column="creator_id" jdbcType="INTEGER"/>
+        <result property="date" column="date" jdbcType="OTHER"/>
+        <result property="place" column="place" jdbcType="VARCHAR"/>
+        <result property="start" column="start" jdbcType="OTHER"/>
+        <result property="end" column="end" jdbcType="OTHER"/>
+        <result property="type" column="type" jdbcType="OTHER"/>
+        <result property="members" column="members" jdbcType="OTHER"/>
+        <result property="desc" column="desc" jdbcType="VARCHAR"/>
+        <result property="instanceId" column="instance_id" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="OTHER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="TbMeetingMap">
+        select id,
+               uuid,
+               title,
+               creator_id,
+               date,
+               place,
+               start,
+               end,
+               type,
+               members, desc, instance_id, status, create_time
+        from linework.tb_meeting
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="TbMeetingMap">
+        select id,
+               uuid,
+               title,
+               creator_id,
+               date,
+               place,
+               start,
+               end,
+               type,
+               members, desc, instance_id, status, create_time
+        from linework.tb_meeting
+        limit #{offset}, #{limit}
+    </select>
+
+    <!--通过实体作为筛选条件查询-->
+    <select id="queryAll" resultMap="TbMeetingMap">
+        select
+        id, uuid, title, creator_id, date, place, start, end, type, members, desc, instance_id, status, create_time
+        from linework.tb_meeting
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="uuid != null and uuid != ''">
+                and uuid = #{uuid}
+            </if>
+            <if test="title != null and title != ''">
+                and title = #{title}
+            </if>
+            <if test="creatorId != null">
+                and creator_id = #{creatorId}
+            </if>
+            <if test="date != null">
+                and date = #{date}
+            </if>
+            <if test="place != null and place != ''">
+                and place = #{place}
+            </if>
+            <if test="start != null">
+                and start = #{start}
+            </if>
+            <if test="end != null">
+                and end = #{end}
+            </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="members != null">
+                and members = #{members}
+            </if>
+            <if test="desc != null and desc != ''">
+                and desc = #{desc}
+            </if>
+            <if test="instanceId != null and instanceId != ''">
+                and instance_id = #{instanceId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into linework.tb_meeting(uuid, title, creator_id, date, place, start, end, type, members, desc,
+                                        instance_id, status, create_time)
+        values (#{uuid}, #{title}, #{creatorId}, #{date}, #{place}, #{start}, #{end}, #{type}, #{members}, #{desc},
+                #{instanceId}, #{status}, #{createTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into linework.tb_meeting(uuid, title, creator_id, date, place, start, end, type, members, desc,
+        instance_id, status, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uuid}, #{entity.title}, #{entity.creatorId}, #{entity.date}, #{entity.place}, #{entity.start},
+            #{entity.end}, #{entity.type}, #{entity.members}, #{entity.desc}, #{entity.instanceId}, #{entity.status},
+            #{entity.createTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into linework.tb_meeting(uuid, title, creator_id, date, place, start, end, type, members, desc,
+        instance_id, status, create_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.uuid}, #{entity.title}, #{entity.creatorId}, #{entity.date}, #{entity.place}, #{entity.start},
+            #{entity.end}, #{entity.type}, #{entity.members}, #{entity.desc}, #{entity.instanceId}, #{entity.status},
+            #{entity.createTime})
+        </foreach>
+        on duplicate key update
+        uuid = values(uuid) , title = values(title) , creator_id = values(creator_id) , date = values(date) , place =
+        values(place) , start = values(start) , end = values(end) , type = values(type) , members = values(members) ,
+        desc = values(desc) , instance_id = values(instance_id) , status = values(status) , create_time =
+        values(create_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update linework.tb_meeting
+        <set>
+            <if test="uuid != null and uuid != ''">
+                uuid = #{uuid},
+            </if>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="creatorId != null">
+                creator_id = #{creatorId},
+            </if>
+            <if test="date != null">
+                date = #{date},
+            </if>
+            <if test="place != null and place != ''">
+                place = #{place},
+            </if>
+            <if test="start != null">
+                start = #{start},
+            </if>
+            <if test="end != null">
+                end = #{end},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="members != null">
+                members = #{members},
+            </if>
+            <if test="desc != null and desc != ''">
+                desc = #{desc},
+            </if>
+            <if test="instanceId != null and instanceId != ''">
+                instance_id = #{instanceId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from linework.tb_meeting
+        where id = #{id}
+    </delete>
+
 </mapper>
