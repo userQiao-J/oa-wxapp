@@ -1,0 +1,45 @@
+@import url("../../style.less");
+
+.box-view{
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.logo{
+	margin-top: 126rpx;
+	width: 70%;
+}
+
+.logo-title{
+	font-size: 48rpx;
+	font-weight: bold;
+	margin-top: 8%;
+	color: @font-color;
+}
+
+.login-btn{
+	width: 60%;
+	position: absolute;
+	bottom: 20%;
+	left: 20%;
+	box-sizing: border-box;
+	background-color: @background-color;
+	color: #FFF;
+}
+
+.login-btn:active{
+    background-color: @background-color-active;
+}
+
+.register-container{
+    position: absolute;
+    bottom: 50rpx;
+    width: 100%;
+    text-align: center;
+    font-size: 30rpx;
+    color: @font-color;
+    .register{
+        color: @background-color;
+    }
+}
