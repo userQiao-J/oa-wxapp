@@ -7,7 +7,7 @@ server:
     connection-timeout: 5000ms
   port: 8080
   servlet:
-    context-path: /line-word
+    context-path: /line-work
 
 spring:
   # MySQL数据源
@@ -68,3 +68,8 @@ line-work:
     expire: 5
     #令牌缓存时间（天数）
     cache-expire: 10
+  wx:
+    # 小程序ID
+    appId: wxd263f96b5b2f5339
+    # 密钥
+    secret: 42eb15618bbdf9aa9077aa8ee4d0cba9

@@ -3,6 +3,7 @@ package com.userqiao.linework.service;
 import com.userqiao.linework.entity.TbUser;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 用户表(TbUser)表服务接口
@@ -29,13 +30,6 @@ public interface TbUserService {
      */
     List<TbUser> queryAllByLimit(int offset, int limit);
 
-    /**
-     * 新增数据
-     *
-     * @param tbUser 实例对象
-     * @return 实例对象
-     */
-    TbUser insert(TbUser tbUser);
 
     /**
      * 修改数据
@@ -53,4 +47,27 @@ public interface TbUserService {
      */
     boolean deleteById(Integer id);
 
+    /**
+     * 根据用户Code获取openId
+     * @param code
+     * @return
+     */
+    String getOpenId(String code);
+
+    /**
+     * 用户注册
+     * @param registerCode
+     * @param code
+     * @param nickname
+     * @param photo
+     * @return
+     */
+    int registerUser(String registerCode,String code,String nickname,String photo);
+
+    /**
+     * 查询用户权限列表
+     * @param userId
+     * @return
+     */
+    Set<String> searchUserPermissions(int userId);
 }

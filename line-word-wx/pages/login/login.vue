@@ -1,4 +1,4 @@
-<template>
+ <template>
 	<view >
 		<view class="box-view">
 			<image src="../../static/602f45c4a4d7b.png" mode="widthFix" class="logo"></image>
@@ -16,7 +16,12 @@
 	export default {
 		data() {
 			return {
-
+				toRegister(){
+					/* console.log('测试一下') */
+					uni.navigateTo({
+						url: '../register/register'
+					})
+				}
 			};
 		}
 	}

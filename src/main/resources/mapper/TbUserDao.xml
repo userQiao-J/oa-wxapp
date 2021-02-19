@@ -35,7 +35,7 @@
                dept_id,
                status,
                create_time
-        from linework.tb_user
+        from tb_user
         where id = #{id}
     </select>
 
@@ -55,7 +55,7 @@
                dept_id,
                status,
                create_time
-        from linework.tb_user
+        from tb_user
         limit #{offset}, #{limit}
     </select>
 
@@ -63,7 +63,7 @@
     <select id="queryAll" resultMap="TbUserMap">
         select
         id, open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id, status, create_time
-        from linework.tb_user
+        from tb_user
         <where>
             <if test="id != null">
                 and id = #{id}
@@ -112,14 +112,43 @@
 
     <!--新增所有列-->
     <insert id="insert" keyProperty="id" useGeneratedKeys="true">
-        insert into linework.tb_user(open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id,
-                                     status, create_time)
-        values (#{openId}, #{nickname}, #{photo}, #{name}, #{sex}, #{tel}, #{email}, #{hiredate}, #{role}, #{root},
-                #{deptId}, #{status}, #{createTime})
+        INSERT INTO tb_user
+        SET
+        <if test="openId!=null">
+            open_id = #{openId},
+        </if>
+        <if test="nickname!=null">
+            nickname = #{nickname},
+        </if>
+        <if test="photo!=null">
+            photo = #{photo},
+        </if>
+        <if test="name!=null">
+            name = #{name},
+        </if>
+        <if test="sex!=null">
+            sex = #{sex},
+        </if>
+        <if test="tel!=null">
+            tel = #{tel},
+        </if>
+        <if test="email!=null">
+            email=#{email},
+        </if>
+        <if test="hiredate!=null">
+            hiredate = #{hiredate},
+        </if>
+        role = #{role},
+        root = #{root},
+        <if test="deptName!=null">
+            dept_id = ( SELECT id FROM tb_dept WHERE dept_name = #{deptName} ),
+        </if>
+        status = #{status},
+        create_time = #{createTime}
     </insert>
 
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into linework.tb_user(open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id,
+        insert into tb_user(open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id,
         status, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
@@ -130,7 +159,7 @@
     </insert>
 
     <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
-        insert into linework.tb_user(open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id,
+        insert into tb_user(open_id, nickname, photo, name, sex, tel, email, hiredate, role, root, dept_id,
         status, create_time)
         values
         <foreach collection="entities" item="entity" separator=",">
@@ -146,7 +175,7 @@
 
     <!--通过主键修改数据-->
     <update id="update">
-        update linework.tb_user
+        update tb_user
         <set>
             <if test="openId != null and openId != ''">
                 open_id = #{openId},
@@ -194,8 +223,23 @@
     <!--通过主键删除-->
     <delete id="deleteById">
         delete
-        from linework.tb_user
+        from tb_user
         where id = #{id}
     </delete>
 
+    <select id="haveAdminUser" resultType="boolean">
+        SELECT IF(COUNT(1),'true','false') FROM tb_user WHERE root=1;
+    </select>
+
+    <select id="searchIdByOpenId" parameterType="String" resultType="Integer">
+        SELECT id FROM tb_user WHERE open_id=#{openId} AND status = 1
+    </select>
+
+    <select id="searchUserPermissions" parameterType="int" resultType="String">
+        SELECT p.permission_name
+        FROM tb_user u
+                 JOIN tb_role r ON JSON_CONTAINS(u.role, CAST(r.id AS CHAR))
+                 JOIN tb_permission p ON JSON_CONTAINS(r.permissions, CAST(p.id AS CHAR))
+        WHERE u.id = #{userId} AND u.status = 1;
+    </select>
 </mapper>

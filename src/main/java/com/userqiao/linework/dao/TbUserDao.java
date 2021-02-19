@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 用户表(TbUser)表数据库访问层
@@ -47,7 +49,7 @@ public interface TbUserDao {
      * @param tbUser 实例对象
      * @return 影响行数
      */
-    int insert(TbUser tbUser);
+    int insert(Map param);
 
     /**
      * 批量新增数据（MyBatis原生foreach方法）
@@ -80,5 +82,20 @@ public interface TbUserDao {
      * @return 影响行数
      */
     int deleteById(Integer id);
+
+    /**
+     * 判断有没有超级管理员
+     * @return
+     */
+    boolean haveAdminUser();
+
+    /**
+     * 根据openId获取用户ID
+     * @param openId
+     * @return
+     */
+    Integer searchIdByOpenId(String openId);
+
+    Set<String> searchUserPermissions(int userId);
 
 }
