@@ -9,6 +9,7 @@ let baseUrl = "http://127.0.0.1:8080/line-work"
 
 Vue.prototype.url = {
 	register: baseUrl + "/tbUser/register",
+	login: baseUrl + "/tbUser/login",
 }
 
 Vue.prototype.ajax = function(url, method, data, fun) {

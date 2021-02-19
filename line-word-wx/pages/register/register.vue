@@ -55,10 +55,6 @@
 									uni.showToast({
 										title: '绑定成功'
 									});
-
-									/* setTimeout(uni.navigateTo({
-										url: '../login/login'
-									}), 1000) */
 									setTimeout(() => {
 										uni.navigateTo({
 											url: '../login/login'

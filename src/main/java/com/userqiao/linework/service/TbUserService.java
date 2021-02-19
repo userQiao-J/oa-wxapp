@@ -70,4 +70,11 @@ public interface TbUserService {
      * @return
      */
     Set<String> searchUserPermissions(int userId);
+
+    /**
+     * 登录方法
+     * @param code
+     * @return
+     */
+    Integer login(String code);
 }

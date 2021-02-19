@@ -6,9 +6,9 @@
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "uni-app",
-    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarBackgroundColor": "#88a2f6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "Line-Work ",
     "backgroundColor": "#F8F8F8"
   },
   "usingComponents": {}

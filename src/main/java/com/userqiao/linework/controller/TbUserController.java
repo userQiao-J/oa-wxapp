@@ -3,6 +3,7 @@ package com.userqiao.linework.controller;
 import com.userqiao.linework.common.utils.BaseResult;
 import com.userqiao.linework.config.shiro.JwtUtil;
 import com.userqiao.linework.entity.TbUser;
+import com.userqiao.linework.entity.vo.LoginVo;
 import com.userqiao.linework.entity.vo.RegiestVo;
 import com.userqiao.linework.service.TbUserService;
 import io.swagger.annotations.Api;
@@ -84,4 +85,14 @@ public class TbUserController {
         return BaseResult.ok("用户注册成功").put("token",token).put("permission",permsSet);
     }
 
+
+    @PostMapping("/login")
+    @ApiOperation("登陆系统")
+    public BaseResult login(@Validated @RequestBody LoginVo loginVo){
+        int id = tbUserService.login(loginVo.getCode());
+        String token = jwtUtil.createToken(id);
+        Set<String> permsSet = tbUserService.searchUserPermissions(id);
+        saveCacheToken(token, id);
+        return BaseResult.ok("登陆成功").put("token", token).put("permission", permsSet);
+    }
 }

@@ -68,6 +68,7 @@ line-work:
     expire: 5
     #令牌缓存时间（天数）
     cache-expire: 10
+  # 微信开发者测试账号
   wx:
     # 小程序ID
     appId: wxd263f96b5b2f5339

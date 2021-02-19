@@ -17,7 +17,8 @@ _App.default.mpType = 'app';
 var baseUrl = "http://127.0.0.1:8080/line-work";
 
 _vue.default.prototype.url = {
-  register: baseUrl + "/tbUser/register" };
+  register: baseUrl + "/tbUser/register",
+  login: baseUrl + "/tbUser/login" };
 
 
 _vue.default.prototype.ajax = function (url, method, data, fun) {
