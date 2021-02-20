@@ -170,7 +170,9 @@ var _default =
             function (resp) {
               var permission = resp.data.permission;
               uni.setStorageSync('permission', permission);
-              //TODO 跳转到登陆页面
+              uni.switchTab({
+                url: "../index/index" });
+
             });
           },
           fail: function fail(e) {
