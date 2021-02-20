@@ -6,7 +6,8 @@
     "pages/meeting_list/meeting_list",
     "pages/document/document",
     "pages/contacts/contacts",
-    "pages/mine/mine"
+    "pages/mine/mine",
+    "pages/checkin/checkin"
   ],
   "subPackages": [],
   "window": {
@@ -53,6 +54,8 @@
   },
   "usingComponents": {
     "van-button": "/wxcomponents/vant/dist/button/index",
-    "van-cell": "/wxcomponents/vant/dist/cell/index"
+    "van-cell": "/wxcomponents/vant/dist/cell/index",
+    "van-row": "/wxcomponents/vant/dist/row/index",
+    "van-col": "/wxcomponents/vant/dist/col/index"
   }
 }
