@@ -52,6 +52,7 @@
     ]
   },
   "usingComponents": {
-    "van-button": "/wxcomponents/vant/dist/button/index"
+    "van-button": "/wxcomponents/vant/dist/button/index",
+    "van-cell": "/wxcomponents/vant/dist/cell/index"
   }
 }
