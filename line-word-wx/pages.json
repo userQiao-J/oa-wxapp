@@ -1,9 +1,8 @@
 {
-	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+	"pages": [
 		{
 			"path": "pages/login/login",
 			"style": {
-				// "navigationBarTitleText": "",
 				"enablePullDownRefresh": false
 			}
 
@@ -26,6 +25,9 @@
 		"navigationBarBackgroundColor": "#88a2f6",
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "Line-Work ",
-		"backgroundColor": "#F8F8F8"
+		"backgroundColor": "#F8F8F8",
+		"usingComponents":{
+			"van-button":"/wxcomponents/vant/dist/button/index"
+		}
 	}
 }

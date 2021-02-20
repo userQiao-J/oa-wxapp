@@ -11,5 +11,7 @@
     "navigationBarTitleText": "Line-Work ",
     "backgroundColor": "#F8F8F8"
   },
-  "usingComponents": {}
+  "usingComponents": {
+    "van-button": "/wxcomponents/vant/dist/button/index"
+  }
 }
