@@ -81,4 +81,5 @@ public interface SysConfigDao {
      */
     int deleteById(Integer id);
 
+    List<SysConfig> selectAllParam();
 }
